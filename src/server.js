@@ -11,9 +11,6 @@ app.use(morgan('dev'));
 
 app.use('/', routes);
 
-app.use(function(req, res) {
-  res.status(404).render('common/not_found');
-});
 
 app.listen(3000, function() {
   console.log("Guinan says hi!");
