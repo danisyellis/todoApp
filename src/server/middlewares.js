@@ -5,6 +5,8 @@
 //difference between this file and authorization folder? A: write the auth functions in auth, and then call them here with middleware. It's only middleware if it has a req, res, etc.
 const users = require('../models/users');
 const auth = require('../auth/authentication.js');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 //is this where I'll add bcrypt, probably not- prob abstract it out more
 
 const notFound = function(req, res) {
@@ -17,16 +19,18 @@ const errorHandling = function(err, req, res, next) {
 };
 
 const addUserToDB = function(userInfoSubmitted) {
-  auth.encryptPassword(userInfoSubmitted.password)
+  return auth.encryptPassword(userInfoSubmitted.password)
   .then(hashedPassword => {
-  users.createUser(userInfoSubmitted.email, hashedPassword)
-  .then(user => {return user;});
+    console.log(hashedPassword, "hashedPassword in middlewares");
+    return users.createUser(userInfoSubmitted.email, hashedPassword);
   });
 };
 
 const checkPassword = function(userInfoSubmitted) {
-  //use bcrypt to check and see if the userInfoSubmitted.password is the same as the one in the db
-  //users.getPasswordById(userInfoSubmitted.username)
+  return users.getPassword(userInfoSubmitted.email)
+  .then(passwordFromDb => {
+    return auth.checkPassword(userInfoSubmitted.password, passwordFromDb);
+  });
 };
 
   module.exports = {

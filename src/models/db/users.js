@@ -1,8 +1,7 @@
 const db = require('./db');
 
 const createUser = function(email,password) {
-  console.log("I might be making a user in the db");
-  db.oneOrNone(
+  return db.oneOrNone(
     `INSERT INTO account (email, password)
     VALUES ($1, $2)
     RETURNING *
@@ -14,8 +13,15 @@ const createUser = function(email,password) {
   });
 };
 
-const getUser = function() {
-
+const getUser = function(email) {
+  return db.oneOrNone(
+    `SELECT * FROM account
+    WHERE email = $1`, [email]
+  )
+  .catch(err => {
+    console.log(err);
+    throw err;
+  });
 };
 
 module.exports = {

@@ -8,6 +8,7 @@ router.get('/signup', function(req, res) {
 router.post('/signup', function(req, res) {
   middlewares.addUserToDB(req.body)
   .then((user) => {
+    console.log(user, "hi from sessionRoutes");
       res.redirect('/login');
   })
   .catch( err => {
@@ -29,7 +30,22 @@ router.get('/login', function(req,res) {
 });
 
 router.post('/login', function(req, res) {
-  //take username and password from req.body. Check to see if pw matches. And set them to session.user, etc.
+  //TODO: if don't find the user in the db, let message = "email and password don't match"   res.redirect('session/login', {message})
+  //also, make sure user is still accessible for making the req.session.user
+  middlewares.checkPassword(req.body)
+  .then(passwordCorrect => {
+    if(passwordCorrect) {
+      console.log("User logged in");
+      //this needs to be the info from the db
+      req.session.user = req.body;
+      console.log(req.session.user, "session.user");
+      //make this correct
+      res.redirect('/');
+    } else {
+      let message = "username and password don't match";
+      res.redirect('session/login', {message});
+    }
+  });
 });
 
 

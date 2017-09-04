@@ -2,21 +2,11 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const encryptPassword = function(submittedPassword) {
-  //use bcrypt to hash password
-  bcrypt.hash(submittedPassword, saltRounds)
-  .then(hashedPassword => {
-    console.log(hashedPassword)
-    return hashedPassword;
-  })
-  .catch(error => {throw error;});
+  return bcrypt.hash(submittedPassword, saltRounds);
 };
 
 const checkPassword = function(submittedPassword, passwordFromDb) {
-  bcrypt.compare(submittedPassword, passwordFromDb)
-    .then(comparisonResult => {
-      return comparisonResult;
-    })
-    .catch(error => {throw error;});
+  return bcrypt.compare(submittedPassword, passwordFromDb);
 };
 
 module.exports = {

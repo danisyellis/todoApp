@@ -1,7 +1,7 @@
 const db = require('./db');
 
 const create = function(item) {
-  db.query(
+  return db.query(
     `INSERT INTO list_item (name, list_id, importance)
     VALUES ($1::text, $2::int4, $3::text)
     RETURNING *`,
