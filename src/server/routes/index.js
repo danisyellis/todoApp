@@ -8,7 +8,7 @@ router.get('/home', function(req,res) {
 });
 
 router.get('/', function(req,res) {
-  //I will eventually call a function (inside of models/sessions?) to get the stuff for this particular person
+  //I will eventually call a function (inside of models/sessions or maybe change it to be named users?) to get the stuff for this particular person
   res.end();
 });
 

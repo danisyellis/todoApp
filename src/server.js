@@ -5,7 +5,7 @@ const morgan = require('morgan');
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/views');  //then require the files as contacts/show.ejs, etc.
 
 app.use(morgan('dev'));
 
