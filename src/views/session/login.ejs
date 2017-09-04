@@ -1,0 +1,18 @@
+<h1>Login</h1>
+
+  <form method="post" action="/login" class="login-form">
+    <pre class="new-user-form-errors">
+      <%if(message) {%>
+      <%=message%>
+      <%}%>
+    </pre>
+    <label>
+      <span>Email address:</span>
+      <input type="text" name="email" />
+    </label>
+    <label>
+      <span>Password:</span>
+      <input type="password" name="password" />
+    </label>
+    <input type="submit" value="Login">
+  </form>
