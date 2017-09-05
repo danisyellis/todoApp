@@ -1,0 +1,15 @@
+<%- include ../partials/header.ejs %>
+
+<h1><%=list.name%></h1>
+
+<ul>
+  <%for (let i=0; i<list.items.length; i++) { %>
+  <%#  //make these into hrefs once I figure out the correct path %>
+      <li><%=list.items[i]%><button id="editItem">edit</button><button id="deleteItem">delete</button></li>
+  <% } %>
+</ul>
+
+<button id="newItem">New Item</button>
+<button id="randomizer">Choose a task for me!</button>
+
+<%- include ../partials/footer.ejs %>

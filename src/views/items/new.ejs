@@ -1,3 +1,5 @@
+<%- include ../partials/header.ejs %>
+
 <form method="post">
   <input type="text" name="name"/>
   <input type="radio" id="importanceChoice1" name="importance" value="low-priority" />
@@ -8,3 +10,5 @@
   <label for="importanceChoice1">urgent</label>
   <button type="submit">Submit</button>
 </form>
+
+<%- include ../partials/footer.ejs %>

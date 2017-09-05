@@ -14,6 +14,11 @@ router.post('/new', (req,res, next) => {
   .catch( error => {throw error;} );
 });
 
+router.get('/', (req,res) => {
+  let list = {name:"Dani's List", items: ["fly", "sing", "code"]};
+  res.render('lists/show.ejs', {list});
+});
+
 
 
 module.exports = router;
